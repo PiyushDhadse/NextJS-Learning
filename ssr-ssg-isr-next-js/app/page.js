@@ -1,13 +1,18 @@
-export default async function Page() {
-  let data = await fetch('https://api.vercel.app/blog',{ next: { revalidate: false | 0 | 3600 } })
-  let posts = await data.json()
-  return (
-    <ul>
-      {posts.map((post) => (
-        <li key={post.id}>{post.title}</li>
-      ))}
-    </ul>
-  )
-}
+// app/page.js - Your main page
+import TodoApp from './components/TodoApp';
 
-// export const dynamic = 'force-dynamic'
+export default function HomePage() {
+  return (
+    <div className="p-8">
+      <h1 className="text-3xl font-bold mb-6">My App</h1>
+      
+      {/* Server-rendered content */}
+      <p className="mb-6">
+        Welcome to my app! Below is a client-side rendered todo app.
+      </p>
+      
+      {/* CSR Component */}
+      <TodoApp />
+    </div>
+  );
+}
