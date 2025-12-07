@@ -1,13 +1,13 @@
-import React from 'react'
-
-const page = () => {
+export default async function Page() {
+  let data = await fetch('https://api.vercel.app/blog',{ next: { revalidate: false | 0 | 3600 } })
+  let posts = await data.json()
   return (
-    <div>
-      <div className="container">
-        This is the home page
-      </div>
-    </div>
+    <ul>
+      {posts.map((post) => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
   )
 }
 
-export default page
+// export const dynamic = 'force-dynamic'
